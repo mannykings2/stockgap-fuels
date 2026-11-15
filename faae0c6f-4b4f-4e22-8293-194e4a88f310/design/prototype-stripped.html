@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light" />
+<title>Stockgap Fuels Limited — Corporate &amp; Supply Chain Prototype</title>
+<meta name="description" content="Visual prototype: Stockgap Fuels Limited corporate website and integrated LPG, petroleum products and gas cylinder supply chain platform concept." />
+<style>
+/* ============================================================
+   Stockgap Fuels Limited — single-file visual prototype
+   No scripts, no network calls, no live data. All imagery is
+   embedded. Illustrative interface screens use SAMPLE data.
+   ============================================================ */
+
+:root{
+  --paper:#F5F7F9;
+  --paper-2:#EDF1F4;
+  --white:#FFFFFF;
+  --ink:#0C1318;
+  --ink-soft:#22323D;
+  --muted:#5A6B76;
+  --faint:#8494A0;
+  --line:#E2E8EC;
+  --line-strong:#CBD6DD;
+  --blue:#0E4A93;
+  --blue-bright:#1A66D6;
+  --blue-soft:#EDF3FB;
+  --green:#0C7A52;
+  --green-soft:#E7F4EE;
+  --amber:#8F5600;
+  --amber-soft:#FBF1E2;
+  --red:#A8262C;
+  --red-soft:#FBEDED;
+  --navy:#08131C;
+  --navy-2:#0C1A24;
+  --navy-3:#101F2B;
+  --navy-line:#1D3140;
+  --navy-muted:#8CA3B3;
+  --sans:"Inter","Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"Cascadia Mono","Segoe UI Mono",Consolas,monospace;
+  --shadow-sm:0 1px 2px rgba(12,19,24,.05);
+  --shadow-md:0 12px 28px -12px rgba(12,19,24,.18);
+  --shadow-lg:0 40px 80px -32px rgba(4,12,20,.55);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.6;
+  letter-spacing:-.006em;-webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,p,figure,blockquote{margin:0}
+ul{margin:0;padding:0;list-style:none}
+table{border-collapse:collapse;width:100%}
+::selection{background:#CFE0F7;color:#0C1318}
+:focus-visible{outline:2px solid var(--blue-bright);outline-offset:3px}
+
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 28px}
+.section{padding:96px 0}
+.section--tight{padding:64px 0}
+.section--paper{background:var(--paper-2)}
+.section--white{background:var(--white)}
+.section--dark{background:var(--navy);color:#EAF1F6}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11px;font-weight:650;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--blue);
+}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor;opacity:.55}
+.eyebrow--light{color:#8FBEEF}
+
+h2{font-size:clamp(1.75rem,3.1vw,2.55rem);line-height:1.14;letter-spacing:-.028em;font-weight:600}
+h3{font-size:1.0625rem;line-height:1.35;letter-spacing:-.015em;font-weight:600}
+.lede{font-size:1.0625rem;line-height:1.65;color:var(--muted);max-width:64ch}
+.section-head{max-width:74ch;margin-bottom:44px}
+.section-head h2{margin-top:16px}
+.section-head p{margin-top:14px}
+.section-head--split{display:grid;grid-template-columns:1.35fr .8fr;gap:48px;align-items:end;max-width:none}
+.section-head--split .aside-note{
+  font-size:.8125rem;line-height:1.6;color:var(--faint);
+  border-left:2px solid var(--line-strong);padding-left:16px;
+}
+.section--dark .section-head p{color:var(--navy-muted)}
+.section--dark .section-head .aside-note{color:#7E93A3;border-left-color:var(--navy-line)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 21px;border-radius:4px;border:1px solid transparent;
+  font-size:.875rem;font-weight:600;letter-spacing:.005em;line-height:1;
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn svg{width:15px;height:15px;flex:none}
+.btn--primary{background:var(--blue);color:#fff}
+.btn--primary:hover{background:#0B3D7C}
+.btn--outline{border-color:var(--line-strong);color:var(--ink);background:transparent}
+.btn--outline:hover{border-color:var(--ink);background:#fff}
+.btn--onDark{border-color:rgba(255,255,255,.32);color:#fff;background:rgba(255,255,255,.04)}
+.btn--onDark:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6)}
+.btn--portal{border-color:rgba(255,255,255,.34);color:#fff;padding:10px 16px;font-size:.8125rem}
+.btn--portal:hover{background:rgba(255,255,255,.12)}
+.btn[aria-disabled="true"]{cursor:not-allowed}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+
+/* ---------- header ---------- */
+.site-header{position:absolute;inset:0 0 auto 0;z-index:20;padding:20px 0}
+.header-inner{display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:11px;color:#fff;flex:none}
+.brand-mark{
+  width:34px;height:34px;border-radius:4px;flex:none;
+  background:linear-gradient(155deg,#1A66D6,#0B3A75);
+  display:grid;place-items:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 6px 16px -8px rgba(0,0,0,.6);
+}
+.brand-mark svg{width:17px;height:17px}
+.brand-text{display:flex;flex-direction:column;line-height:1.05}
+.brand-text strong{font-size:.9375rem;font-weight:700;letter-spacing:.12em}
+.brand-text small{font-size:.5625rem;letter-spacing:.26em;color:rgba(255,255,255,.62);margin-top:4px;font-weight:600}
+.nav-links{display:flex;align-items:center;gap:26px;margin-left:auto}
+.nav-links a{font-size:.8125rem;font-weight:500;color:rgba(255,255,255,.76);letter-spacing:.002em;padding:4px 0;border-bottom:1px solid transparent;transition:color .16s,border-color .16s}
+.nav-links a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.5)}
+.header-actions{display:flex;align-items:center;gap:12px;flex:none}
+.proto-pill{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.24);
+  padding:5px 9px;border-radius:999px;white-space:nowrap;
+}
+.nav-toggle,.nav-burger{display:none}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;color:#fff;overflow:hidden;
+  background:#07111A url("DATA_URI") center 42%/cover no-repeat;
+}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(5,12,18,.9) 0%,rgba(5,12,18,.52) 34%,rgba(5,12,18,.72) 72%,rgba(5,12,18,.95) 100%),
+    radial-gradient(120% 90% at 78% 12%,rgba(14,74,147,.34),transparent 62%);
+}
+.hero-inner{position:relative;z-index:2;padding:172px 0 0}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:9px;
+  font-size:.6875rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:#CFE3F8;background:rgba(10,30,48,.5);border:1px solid rgba(143,190,239,.28);
+  padding:7px 13px;border-radius:999px;backdrop-filter:blur(6px);
+}
+.hero-badge i{width:5px;height:5px;border-radius:50%;background:#6FD3A8;box-shadow:0 0 0 3px rgba(111,211,168,.18)}
+.hero h1{
+  margin-top:26px;max-width:19ch;
+  font-size:clamp(2.3rem,5.2vw,4.15rem);line-height:1.03;letter-spacing:-.035em;font-weight:600;
+}
+.hero h1 em{font-style:normal;color:#9CC6F2}
+.hero-sub{margin-top:24px;max-width:56ch;font-size:1.0625rem;line-height:1.66;color:rgba(234,241,246,.8)}
+.hero-facts{
+  position:relative;z-index:2;margin-top:68px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(255,255,255,.18);
+}
+.hero-fact{padding:26px 26px 34px 0;border-right:1px solid rgba(255,255,255,.12)}
+.hero-fact:last-child{border-right:0}
+.hero-fact:not(:first-child){padding-left:26px}
+.hero-fact b{display:block;font-size:clamp(1.35rem,2.3vw,1.85rem);font-weight:600;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.hero-fact span{display:block;margin-top:7px;font-size:.75rem;line-height:1.5;color:rgba(234,241,246,.66);max-width:22ch}
+.hero-note{position:relative;z-index:2;padding:0 0 22px;font-size:.6875rem;color:rgba(234,241,246,.45);font-family:var(--mono);letter-spacing:.02em}
+</style>
+</head>
+<body>
+<style>
+/* ---------- company / split ---------- */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+.split--reverse .split-media{order:-1}
+.split-copy h2{margin-top:16px}
+.split-copy p{margin-top:16px;color:var(--muted);font-size:1rem;line-height:1.7}
+
+.figure{position:relative}
+.figure img{width:100%;height:100%;object-fit:cover;border-radius:5px;box-shadow:var(--shadow-md)}
+.figure--tall img{aspect-ratio:4/3}
+.figure figcaption{
+  margin-top:12px;font-size:.75rem;line-height:1.55;color:var(--faint);
+  display:flex;gap:9px;
+}
+.figure figcaption::before{content:"";width:14px;height:1px;background:var(--line-strong);margin-top:9px;flex:none}
+.figure-tag{
+  position:absolute;left:14px;top:14px;z-index:2;
+  background:rgba(8,19,28,.72);color:#fff;backdrop-filter:blur(4px);
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.07em;text-transform:uppercase;
+  padding:5px 9px;border-radius:3px;border:1px solid rgba(255,255,255,.18);
+}
+
+.facts{display:grid;border-top:1px solid var(--line);margin-top:30px}
+.fact{display:grid;grid-template-columns:148px 1fr;gap:20px;padding:15px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.fact dt{font-family:var(--mono);font-size:.6875rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.fact dd{margin:0;font-size:.9375rem;color:var(--ink-soft)}
+.fact dd small{display:block;font-size:.75rem;color:var(--muted);margin-top:3px}
+
+/* ---------- operations cards ---------- */
+.card-grid{display:grid;gap:26px}
+.card-grid--3{grid-template-columns:repeat(3,1fr)}
+.card-grid--2{grid-template-columns:repeat(2,1fr)}
+.op-card{background:var(--white);border:1px solid var(--line);border-radius:5px;overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm)}
+.op-card__media{position:relative;aspect-ratio:16/10;background:var(--paper-2);overflow:hidden}
+.op-card__media img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.op-card:hover .op-card__media img{transform:scale(1.03)}
+.op-card__body{padding:22px 22px 26px}
+.op-card__body p{margin-top:9px;font-size:.875rem;line-height:1.62;color:var(--muted)}
+.op-card__meta{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);display:flex;gap:8px;flex-wrap:wrap}
+.tag{
+  font-family:var(--mono);font-size:.625rem;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--muted);background:var(--paper-2);border:1px solid var(--line);
+  padding:4px 7px;border-radius:3px;
+}
+.confirm{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.6875rem;font-weight:600;letter-spacing:.02em;
+  color:var(--amber);background:var(--amber-soft);border:1px solid #EEDCBC;
+  padding:4px 8px;border-radius:3px;
+}
+
+/* ---------- products ---------- */
+.product-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.product{
+  background:var(--white);border:1px solid var(--line);border-radius:5px;
+  padding:28px 28px 30px;display:flex;flex-direction:column;
+}
+.product__icon{
+  width:38px;height:38px;border-radius:4px;display:grid;place-items:center;
+  background:var(--blue-soft);color:var(--blue);border:1px solid #D6E4F6;margin-bottom:18px;
+}
+.product__icon svg{width:19px;height:19px}
+.product p{margin-top:10px;font-size:.9rem;line-height:1.65;color:var(--muted)}
+.product ul{margin-top:18px;display:grid;gap:9px}
+.product li{position:relative;padding-left:19px;font-size:.8438rem;color:var(--ink-soft);line-height:1.5}
+.product li::before{
+  content:"";position:absolute;left:0;top:7px;width:7px;height:7px;
+  border-radius:2px;background:var(--blue);opacity:.55;
+}
+.product__foot{margin-top:auto;padding-top:20px}
+</style>
+<style>
+/* ---------- platform / dark section ---------- */
+.platform{position:relative;overflow:hidden}
+.platform::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(80% 50% at 12% 0%,rgba(26,102,214,.18),transparent 60%),
+    linear-gradient(180deg,#08131C,#0A1822 55%,#08131C);
+}
+.platform .container{position:relative;z-index:1}
+.scope-note{
+  margin-top:22px;display:inline-flex;align-items:flex-start;gap:9px;
+  font-size:.75rem;line-height:1.55;color:#9DB2C1;
+  border:1px solid var(--navy-line);background:rgba(17,34,47,.6);
+  padding:10px 13px;border-radius:4px;max-width:70ch;
+}
+.scope-note b{color:#DCE8F1;font-weight:600}
+
+.window{
+  background:#0A1620;border:1px solid #1D3040;border-radius:6px;overflow:hidden;
+  box-shadow:var(--shadow-lg);
+}
+.window-bar{
+  display:flex;align-items:center;gap:10px;height:38px;padding:0 13px;
+  background:#091219;border-bottom:1px solid #17283A;
+}
+.dots{display:flex;gap:5px}
+.dots i{width:7px;height:7px;border-radius:50%;background:#2B4152}
+.dots i:first-child{background:#3C5566}
+.window-title{font-family:var(--mono);font-size:.625rem;letter-spacing:.06em;color:#7E95A8;text-transform:uppercase}
+.sample-badge{
+  margin-left:auto;font-family:var(--mono);font-size:.5625rem;letter-spacing:.09em;
+  text-transform:uppercase;color:#F3C98B;background:rgba(191,124,20,.16);
+  border:1px solid rgba(191,124,20,.38);padding:3px 7px;border-radius:3px;white-space:nowrap;
+}
+.mock-scroll{overflow-x:auto}
+.mock-scroll>.window{min-width:820px}
+
+.app{display:grid;grid-template-columns:186px 1fr;font-size:12px;color:#C6D6E2;background:#0A1620}
+.app-side{border-right:1px solid #16283A;background:#091219;padding:14px 10px;display:flex;flex-direction:column;gap:2px;min-height:470px}
+.app-brand{display:flex;align-items:center;gap:8px;padding:0 6px 14px}
+.app-brand span{width:20px;height:20px;border-radius:3px;background:linear-gradient(150deg,#2C7CE6,#0E4A93);display:grid;place-items:center;font-size:9px;font-weight:700;color:#fff}
+.app-brand b{font-size:10.5px;letter-spacing:.1em;color:#E6EFF6;font-weight:600}
+.app-nav{display:flex;align-items:center;gap:8px;height:28px;padding:0 8px;border-radius:3px;color:#8CA3B3;font-size:11px;white-space:nowrap}
+.app-nav i{width:9px;height:9px;border:1px solid #3B5668;border-radius:2px;flex:none}
+.app-nav.is-active{background:#13293A;color:#EAF3FA;box-shadow:inset 2px 0 0 #2C7CE6}
+.app-nav.is-active i{border-color:#6FA8E4;background:rgba(44,124,230,.35)}
+.app-nav em{margin-left:auto;font-style:normal;font-size:9px;background:rgba(44,124,230,.22);color:#9FC7F5;padding:1px 5px;border-radius:2px}
+.app-side-foot{margin-top:auto;display:flex;align-items:center;gap:7px;padding:10px 6px 0;border-top:1px solid #16283A}
+.avatar{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:9px;font-weight:600;color:#08131C;background:#9FC7F5;flex:none}
+.app-side-foot div{line-height:1.2}
+.app-side-foot b{display:block;font-size:9.5px;color:#DCE8F1;font-weight:600}
+.app-side-foot span{font-size:8.5px;color:#7E95A8}
+.app-main{min-width:0;display:flex;flex-direction:column}
+.app-top{display:flex;align-items:center;gap:12px;height:42px;padding:0 16px;border-bottom:1px solid #16283A}
+.crumbs{font-size:10px;color:#7E95A8;letter-spacing:.03em}
+.crumbs b{color:#DCE8F1;font-weight:500}
+.app-search{
+  margin-left:auto;display:flex;align-items:center;gap:6px;font-size:10px;color:#6F879A;
+  border:1px solid #1D3040;background:#0C1B26;border-radius:3px;padding:5px 9px;min-width:150px;
+}
+.app-bell{width:22px;height:22px;border:1px solid #1D3040;border-radius:3px;position:relative}  .app-bell::after{content:"";position:absolute;right:5px;top:5px;width:4px;height:4px;border-radius:50%;background:#E1A65A}
+.app-body{padding:14px 16px 18px;display:grid;gap:10px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.kpi{background:#0E1E2A;border:1px solid #1B3040;border-radius:4px;padding:10px 11px}
+.kpi small{display:block;font-size:8.5px;letter-spacing:.09em;text-transform:uppercase;color:#7E95A8}
+.kpi b{display:block;margin-top:5px;font-size:19px;font-weight:600;letter-spacing:-.02em;color:#F1F7FB;font-variant-numeric:tabular-nums}
+.kpi span{display:inline-block;margin-top:4px;font-size:8.5px;color:#7FD0A8}
+.kpi span.warn{color:#E3B36A}
+.panels{display:grid;grid-template-columns:1.55fr 1fr;gap:10px}
+.panel{background:#0E1E2A;border:1px solid #1B3040;border-radius:4px;padding:11px 12px;min-width:0}
+.panel-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+.panel-head b{font-size:10.5px;color:#E4EEF6;font-weight:600;letter-spacing:.01em}
+.panel-head span{font-size:8.5px;color:#738A9C}
+.legend{display:flex;gap:12px;margin-top:7px;font-size:8.5px;color:#8CA3B3}
+.legend i{display:inline-block;width:6px;height:6px;border-radius:1px;background:#2C7CE6;margin-right:5px}
+.legend i.g{background:#3FA37A}
+.mini-table{width:100%;font-size:9.5px;border-collapse:collapse}
+.mini-table th{
+  text-align:left;font-weight:500;font-size:8px;letter-spacing:.08em;text-transform:uppercase;
+  color:#6F879A;padding:0 0 6px;border-bottom:1px solid #1B3040;
+}
+.mini-table td{padding:6px 0;border-bottom:1px solid #16283A;color:#BACDDB;vertical-align:middle}
+.mini-table tr:last-child td{border-bottom:0}
+.mini-table .ref{font-family:var(--mono);font-size:9px;color:#9FC7F5}
+.mini-table .num{text-align:right;font-variant-numeric:tabular-nums;color:#E4EEF6}
+.chip{display:inline-block;font-size:8px;letter-spacing:.04em;padding:2px 5px;border-radius:2px;white-space:nowrap}
+.chip--wait{background:rgba(191,124,20,.16);color:#E9BE7C;border:1px solid rgba(191,124,20,.3)}
+.chip--ok{background:rgba(15,122,82,.18);color:#7FD0A8;border:1px solid rgba(15,122,82,.35)}
+.chip--info{background:rgba(44,124,230,.16);color:#9FC7F5;border:1px solid rgba(44,124,230,.3)}
+.chip--bad{background:rgba(168,38,44,.18);color:#E8A0A3;border:1px solid rgba(168,38,44,.38)}
+.subpanels{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.bar-row{display:grid;grid-template-columns:30px 1fr 54px;gap:7px;align-items:center;font-size:9px;margin-bottom:6px}
+.bar-row span:first-child{color:#9FB2C2}
+.bar-row b{text-align:right;font-weight:500;color:#DCE8F1;font-variant-numeric:tabular-nums;font-size:9px}
+.track{height:5px;background:#13283A;border-radius:2px;overflow:hidden}
+.fill{height:100%;background:linear-gradient(90deg,#1E5FB4,#3D8BE6)}
+.fill--g{background:linear-gradient(90deg,#1F7A57,#43A87C)}
+.fill--a{background:linear-gradient(90deg,#8A6320,#C99A4A)}
+.list-mini{display:grid;gap:7px;font-size:9.5px;color:#BACDDB}
+.list-mini li{display:flex;gap:7px;align-items:baseline}
+.list-mini li::before{content:"";width:4px;height:4px;border-radius:50%;background:#3D8BE6;flex:none;margin-top:4px}
+.list-mini em{margin-left:auto;font-style:normal;font-size:8.5px;color:#7E95A8;white-space:nowrap}
+
+/* traceability */
+.trace-wrap{padding:14px 16px 16px}
+.trace-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding-bottom:12px;border-bottom:1px solid #1B3040}
+.trace-head h4{margin:0;font-size:12px;color:#EAF3FA;font-weight:600}
+.trace-head p{margin:4px 0 0;font-family:var(--mono);font-size:9px;color:#7E95A8;letter-spacing:.03em}
+.trace{display:grid;margin-top:4px}
+.trace-step{display:grid;grid-template-columns:82px 18px 1fr;gap:10px;padding:9px 0}
+.trace-time{font-family:var(--mono);font-size:8.5px;color:#6F879A;line-height:1.5;padding-top:1px}
+.trace-rail{position:relative;display:flex;justify-content:center}
+.trace-rail::before{content:"";position:absolute;top:0;bottom:-18px;width:1px;background:#22384A}
+.trace-step:last-child .trace-rail::before{display:none}
+.trace-dot{position:relative;width:7px;height:7px;border-radius:50%;background:#3D8BE6;margin-top:4px;box-shadow:0 0 0 3px rgba(44,124,230,.15)}
+.trace-step.is-done .trace-dot{background:#3FA37A;box-shadow:0 0 0 3px rgba(63,163,122,.14)}
+.trace-body{min-width:0}
+.trace-body b{display:block;font-size:10.5px;color:#E4EEF6;font-weight:600}
+.trace-body span{display:block;margin-top:2px;font-size:9.5px;color:#93A9B9;line-height:1.5}
+.trace-body code{font-family:var(--mono);font-size:8.5px;color:#9FC7F5;background:#102436;border:1px solid #1C3446;padding:1px 4px;border-radius:2px}
+.trace-foot{display:flex;flex-wrap:wrap;gap:14px;padding-top:11px;border-top:1px solid #1B3040;font-size:8.5px;color:#7E95A8}
+.trace-foot b{color:#BACDDB;font-weight:500}
+
+/* QC */
+.qc-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.qc-cell{background:#102331;border:1px solid #1B3040;border-radius:3px;padding:7px 8px}
+.qc-cell small{display:block;font-size:7.5px;letter-spacing:.08em;text-transform:uppercase;color:#6F879A}
+.qc-cell b{display:block;margin-top:3px;font-size:11px;color:#E4EEF6;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* role grid */
+.roles{
+  margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--navy-line);border:1px solid var(--navy-line);border-radius:5px;overflow:hidden;
+}
+.role{background:#0A1822;padding:18px 18px 20px}
+.role b{display:block;font-size:.8125rem;color:#E8F1F7;font-weight:600;letter-spacing:-.005em}
+.role span{display:block;margin-top:6px;font-size:.6875rem;line-height:1.5;color:#8CA3B3}
+.role i{
+  display:inline-block;font-family:var(--mono);font-style:normal;font-size:.5625rem;
+  letter-spacing:.06em;color:#9FC7F5;border:1px solid #24445C;
+  padding:2px 5px;border-radius:2px;margin-top:10px;
+}
+
+/* flow */
+.flow{margin-top:44px;display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--navy-line);border-radius:5px;overflow:hidden;background:#0A1822}
+.flow-step{flex:1 1 0;min-width:132px;padding:15px 16px;border-right:1px solid var(--navy-line);position:relative}
+.flow-step:last-child{border-right:0}
+.flow-step i{font-family:var(--mono);font-style:normal;font-size:.5625rem;letter-spacing:.1em;color:#5F7B8E}
+.flow-step b{display:block;margin-top:6px;font-size:.75rem;color:#DCE8F1;font-weight:600}
+.flow-step span{display:block;margin-top:4px;font-size:.6563rem;color:#7E95A8;line-height:1.5}
+
+/* portal + contact */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.panel-card{background:var(--white);border:1px solid var(--line);border-radius:5px;padding:30px;box-shadow:var(--shadow-sm)}
+.panel-card--dark{background:#0B1B26;border-color:#1D3040;color:#DCE8F1}
+.field{display:grid;gap:7px;margin-top:16px}
+.field label{font-size:.75rem;font-weight:600;color:var(--ink-soft);letter-spacing:.02em}
+.field input,.field select,.field textarea{
+  width:100%;font:inherit;font-size:.875rem;padding:11px 12px;border-radius:3px;
+  border:1px solid var(--line-strong);background:#fff;color:var(--ink);
+}
+.field input[disabled],.field select[disabled],.field textarea[disabled]{background:#F2F5F7;color:#6E7E89;cursor:not-allowed}
+.field-note{font-size:.6875rem;color:var(--faint);line-height:1.5}
+.form-note{
+  margin-top:18px;font-size:.75rem;line-height:1.55;color:var(--muted);
+  background:var(--paper-2);border-left:2px solid var(--line-strong);padding:10px 13px;
+}
+.contact-list{display:grid;gap:0;margin-top:26px;border-top:1px solid var(--line)}
+.contact-list div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.875rem}
+.contact-list dt{font-family:var(--mono);font-size:.6875rem;letter-spacing:.07em;text-transform:uppercase;color:var(--faint)}
+.contact-list dd{margin:0;color:var(--ink-soft);line-height:1.55}
+.contact-list dd small{display:block;color:var(--muted);font-size:.75rem}
+
+/* safety */
+.commitments{display:grid;gap:0;margin-top:8px;border-top:1px solid var(--line)}
+.commitment{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+.commitment i{
+  font-family:var(--mono);font-style:normal;font-size:.6875rem;color:var(--blue);
+  border:1px solid #C9DBEF;background:var(--blue-soft);border-radius:3px;
+  width:28px;height:28px;display:grid;place-items:center;
+}
+.commitment b{font-size:.9375rem;font-weight:600;letter-spacing:-.012em}
+.commitment p{margin-top:6px;font-size:.875rem;line-height:1.62;color:var(--muted);max-width:52ch}
+.callout{
+  margin-top:26px;border:1px solid #E4D4B8;background:#FCF6EB;border-radius:4px;
+  padding:18px 20px;font-size:.8125rem;line-height:1.6;color:#6B4E1E;
+}
+.callout b{color:#4E3A17}
+
+/* appendix */
+.appendix{background:#0C1318;color:#CBD8E2;padding:72px 0 80px}
+.appendix h2{font-size:1.35rem;letter-spacing:-.02em;color:#F1F7FB}
+.appendix .lede{color:#8CA3B3;font-size:.9375rem;margin-top:12px}
+.appendix-tag{
+  display:inline-block;font-family:var(--mono);font-size:.625rem;letter-spacing:.1em;
+  text-transform:uppercase;color:#E9BE7C;border:1px solid rgba(191,124,20,.4);
+  background:rgba(191,124,20,.12);padding:4px 8px;border-radius:3px;margin-bottom:18px;
+}
+.reg-table{margin-top:32px;font-size:.8125rem;border-top:1px solid #26343E}
+.reg-table th{
+  text-align:left;font-family:var(--mono);font-weight:500;font-size:.625rem;
+  letter-spacing:.08em;text-transform:uppercase;color:#7E93A3;padding:11px 14px 11px 0;
+  border-bottom:1px solid #26343E;vertical-align:bottom;
+}
+.reg-table td{padding:13px 14px 13px 0;border-bottom:1px solid #1B262F;vertical-align:top;line-height:1.55;color:#B6C7D3}
+.reg-table td:first-child{color:#EAF1F6;font-weight:500;width:20%}
+.reg-table td:last-child{white-space:nowrap}
+.reg-table a{color:#9FC7F5;border-bottom:1px solid rgba(159,199,245,.3)}
+.reg-table a:hover{border-bottom-color:#9FC7F5}
+.conf{font-family:var(--mono);font-size:.625rem;letter-spacing:.05em;text-transform:uppercase;padding:2px 6px;border-radius:2px;border:1px solid}
+.conf--h{color:#7FD0A8;border-color:rgba(15,122,82,.45);background:rgba(15,122,82,.12)}
+.conf--m{color:#E9BE7C;border-color:rgba(191,124,20,.42);background:rgba(191,124,20,.1)}
+.pending{margin-top:30px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px 32px}
+.pending li{font-size:.8125rem;color:#A8BBC8;padding-left:18px;position:relative;line-height:1.55}
+.pending li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:#C99A4A}
+.appendix-note{margin-top:28px;font-family:var(--mono);font-size:.625rem;letter-spacing:.04em;color:#6C8090;line-height:1.7}
+
+/* footer */
+.site-footer{background:#06101A;color:#9DB2C1;padding:64px 0 30px;border-top:1px solid #172531}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(3,.7fr);gap:44px}
+.footer-brand .brand{color:#fff}
+.footer-brand p{margin-top:16px;font-size:.8125rem;line-height:1.65;color:#8CA3B3;max-width:34ch}
+.footer-col h4{font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;color:#DCE8F1;font-weight:600}
+.footer-col ul{margin-top:14px;display:grid;gap:9px}
+.footer-col a{font-size:.8125rem;color:#8CA3B3}
+.footer-col a:hover{color:#fff}
+.footer-bottom{
+  margin-top:48px;padding-top:20px;border-top:1px solid #172531;
+  display:flex;flex-wrap:wrap;gap:14px 26px;justify-content:space-between;
+  font-size:.6875rem;color:#6C8090;line-height:1.6;
+}
+.footer-bottom p{max-width:78ch}
+
+/* reveal */
+@media (prefers-reduced-motion:no-preference){
+  .hero h1,.hero-sub,.hero-badge,.hero-facts{animation:rise .7s cubic-bezier(.2,.7,.3,1) both}
+  .hero h1{animation-delay:.06s}
+  .hero-sub{animation-delay:.14s}
+  .hero-facts{animation-delay:.22s}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+
+/* responsive */
+@media (max-width:1024px){
+  .split{gap:40px}
+  .card-grid--3{grid-template-columns:repeat(2,1fr)}
+  .roles{grid-template-columns:repeat(3,1fr)}
+  .app{grid-template-columns:1fr}
+  .app-side{display:none}
+  .app-side-foot{display:none}
+  .footer-grid{grid-template-columns:1.2fr 1fr 1fr;gap:32px}
+  .footer-brand{grid-column:1/-1}
+}
+@media (max-width:860px){
+  .section{padding:70px 0}
+  .hero-inner{padding-top:132px}
+  .hero-facts{grid-template-columns:1fr 1fr}
+  .hero-fact{border-right:0;border-bottom:1px solid rgba(255,255,255,.12);padding:20px 0}
+  .hero-fact:not(:first-child){padding-left:0}
+  .hero-fact:nth-child(odd){padding-right:20px}
+  .split,.grid-2,.section-head--split{grid-template-columns:1fr;gap:34px}
+  .split--reverse .split-media{order:0}
+  .card-grid--3,.card-grid--2,.product-grid{grid-template-columns:1fr}
+  .roles{grid-template-columns:repeat(2,1fr)}
+  .pending{grid-template-columns:1fr}
+  .panels,.subpanels,.qc-summary{grid-template-columns:1fr}
+  .kpis{grid-template-columns:1fr 1fr}
+  .nav-burger{
+    display:grid;gap:4px;margin-left:auto;width:34px;height:34px;place-content:center;
+    border:1px solid rgba(255,255,255,.3);border-radius:3px;cursor:pointer;
+  }
+  .nav-burger span{display:block;width:15px;height:1.5px;background:#fff}
+  .nav-links{
+    display:none;position:absolute;left:20px;right:20px;top:72px;margin:0;
+    flex-direction:column;align-items:stretch;gap:0;
+    background:#0A1721;border:1px solid #22333F;border-radius:4px;padding:8px 0;
+    box-shadow:var(--shadow-lg);
+  }
+  .nav-links a{padding:11px 18px;border-bottom:0;font-size:.875rem}
+  .nav-toggle:checked ~ .nav-links{display:flex}
+  .header-actions{margin-left:0}
+  .proto-pill{display:none}
+  .figure--tall img{aspect-ratio:16/10}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .reg-table td:first-child{width:auto}
+}
+@media (max-width:560px){
+  .container{padding:0 20px}
+  .hero h1{font-size:2.05rem}
+  .hero-sub{font-size:.9375rem}
+  .hero-facts{grid-template-columns:1fr}
+  .hero-fact:nth-child(odd){padding-right:0}
+  .roles{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .fact{grid-template-columns:1fr;gap:4px}
+  .contact-list div{grid-template-columns:1fr;gap:4px}
+  .product{padding:24px 22px 26px}
+  .panel-card{padding:24px 22px}
+  .flow-step{flex:1 1 50%}
+  .app-body{padding:12px}
+}
+@media print{
+  .site-header,.btn,.hero-facts,.scope-note{display:none!important}
+  body{background:#fff}
+  .hero{color:#000;background:#fff!important}
+  .section--dark,.appendix,.site-footer{background:#fff!important;color:#000!important}
+  .window{box-shadow:none;border-color:#ccc}
+  .section{padding:30px 0;break-inside:avoid}
+}
+</style>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top" aria-label="Stockgap Fuels Limited — home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3.2c2.7 2.6 4.6 4.9 4.6 7.4A4.6 4.6 0 0 1 12 15.2a4.6 4.6 0 0 1-4.6-4.6c0-2.5 1.9-4.8 4.6-7.4Z"/>
+          <path d="M6.4 18.4h11.2M8.2 21h7.6"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <strong>STOCKGAP</strong>
+        <small>FUELS LIMITED</small>
+      </span>
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" style="display:none">
+    <label for="nav-toggle" class="nav-burger" aria-label="Toggle navigation"><span></span><span></span><span></span></label>
+
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#company">Company</a>
+      <a href="#operations">Operations</a>
+      <a href="#products">Products &amp; services</a>
+      <a href="#platform">Platform</a>
+      <a href="#safety">Safety</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <span class="proto-pill">Pitch prototype</span>
+      <a class="btn btn--portal" href="#portal">Client portal</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="container hero-inner">
+    <span class="hero-badge"><i aria-hidden="true"></i> Downstream energy infrastructure &middot; Port Harcourt, Nigeria</span>
+    <h1>LPG and refined products, stored, moved and <em>accounted for</em>.</h1>
+    <p class="hero-sub">
+      Stockgap Fuels Limited operates LPG storage and downstream distribution from its Port Harcourt
+      terminal, supplying LPG, PMS, AGO and DPK across the South-South &mdash; with cylinder bottling
+      and distribution expanding to new regions.
+    </p>
+    <div class="actions">
+      <a class="btn btn--primary" href="#operations">Explore our operations</a>
+      <a class="btn btn--onDark" href="#platform">See the platform concept</a>
+    </div>
+
+    <div class="hero-facts">
+      <div class="hero-fact"><b>2019</b><span>LPG terminal commissioned at Rumuolumeni, Port Harcourt</span></div>
+      <div class="hero-fact"><b>15,000 MT</b><span>LPG storage capacity reported for the terminal</span></div>
+      <div class="hero-fact"><b>LPG &middot; PMS &middot; AGO &middot; DPK</b><span>Product slate handled in bulk storage and distribution</span></div>
+      <div class="hero-fact"><b>4 regions</b><span>Additional bottling and storage sites announced for development</span></div>
+    </div>
+    <p class="hero-note">Figures drawn from cited public sources. Capacity reporting differs between publications &mdash; see research notes.</p>
+  </div>
+</section>
+
+<!-- ============ COMPANY ============ -->
+<section class="section section--white" id="company">
+  <div class="container">
+    <div class="split">
+      <div class="split-copy">
+        <span class="eyebrow">The company</span>
+        <h2>A Port Harcourt terminal built to shorten the LPG journey.</h2>
+        <p>
+          Stockgap Fuels Limited was incorporated in Nigeria as a private limited liability company and
+          is engaged in the distribution of refined petroleum products and Liquefied Petroleum Gas (LPG),
+          sourced directly from international trading partners or through coastal lifting under a
+          strategic alliance with the NNPC.
+        </p>
+        <p>
+          The company&rsquo;s LPG terminal at Rumuolumeni was commissioned in 2019, ending the practice of
+          shipping product to Lagos and trucking it back to the Niger Delta. Product now discharges
+          directly at the Port Harcourt jetty for onward distribution to distributors, retailers and
+          households in the region.
+        </p>
+
+        <dl class="facts">
+          <div class="fact">
+            <dt>Head office</dt>
+            <dd>Eagle Cement Road, Rumuolumeni, Port Harcourt, Rivers State
+              <small>As published on the company&rsquo;s website &mdash; to be confirmed</small>
+            </dd>
+          </div>
+          <div class="fact">
+            <dt>Core activity</dt>
+            <dd>Bulk storage and distribution of LPG and refined petroleum products</dd>
+          </div>
+          <div class="fact">
+            <dt>Supply routes</dt>
+            <dd>Direct import and coastal lifting under a strategic alliance with NNPC</dd>
+          </div>
+          <div class="fact">
+            <dt>Published contact</dt>
+            <dd>+234 (84) 700 149
+              <small>Official email address pending confirmation</small>
+            </dd>
+          </div>
+        </dl>
+      </div>
+      <figure class="figure figure--tall">
+        <span class="figure-tag">Company photograph</span>
+        <img src="DATA_URI" alt="Stockgap Fuels personnel in high-visibility vests and a branded helmet standing in front of the LPG spheres and tanker loading bays at the Port Harcourt terminal." loading="lazy" />
+        <figcaption>Terminal visit at the LPG storage facility, Port Harcourt. Photograph supplied by the company.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OPERATIONS ============ -->
+<section class="section section--paper" id="operations">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <span class="eyebrow">Operations &amp; infrastructure</span>
+        <h2>One terminal, four products, a regional distribution footprint.</h2>
+        <p class="lede">
+          Storage, marine receipt and cylinder handling sit on a single site, which shortens the distance
+          between a cargo discharge and the truck that serves a distributor.
+        </p>
+      </div>
+      <p class="aside-note">
+        Tank counts, working capacities and throughput figures are not published. Details are marked
+        as pending confirmation rather than estimated.
+      </p>
+    </div>
+
+    <div class="card-grid card-grid--3">
+      <article class="op-card">
+        <div class="op-card__media">
+          <img src="DATA_URI" alt="Large spherical LPG storage tanks with red walkways and pipework at the Port Harcourt terminal." loading="lazy" />
+        </div>
+        <div class="op-card__body">
+          <h3>LPG storage terminal</h3>
+          <p>
+            Spherical and bullet storage for liquefied petroleum gas, with tank inventory held under
+            continuous measurement and reconciliation before any allocation is released.
+          </p>
+          <div class="op-card__meta">
+            <span class="tag">Rumuolumeni</span>
+            <span class="tag">Bulk LPG</span>
+            <span class="confirm">Tank data pending</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="op-card">
+        <div class="op-card__media">
+          <img src="DATA_URI" alt="Two Stockgap representatives walking through a red-painted plant structure with electrical control panels." loading="lazy" />
+        </div>
+        <div class="op-card__body">
+          <h3>Bottling &amp; cylinder handling</h3>
+          <p>
+            Cylinder filling, handling and dispatch sit alongside the terminal, supporting distribution
+            to resellers and households. Additional bottling capacity is being developed.
+          </p>
+          <div class="op-card__meta">
+            <span class="tag">Cylinder filling</span>
+            <span class="tag">Dispatch</span>
+            <span class="confirm">Expansion: 4 regions</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="op-card">
+        <div class="op-card__media">
+          <img src="DATA_URI" alt="An inspector in a branded hard hat and high-visibility vest recording notes on a clipboard during a terminal walk-down." loading="lazy" />
+        </div>
+        <div class="op-card__body">
+          <h3>Inspection &amp; assurance</h3>
+          <p>
+            Quantity and quality checks at receipt, documented walk-downs and recorded handovers at
+            every stage between the jetty and the customer.
+          </p>
+          <div class="op-card__meta">
+            <span class="tag">Quantity checks</span>
+            <span class="tag">Recorded handovers</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- ============ PRODUCTS ============ -->
+<section class="section section--white" id="products">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Products &amp; services</span>
+      <h2>What Stockgap stores, supplies and distributes.</h2>
+      <p class="lede">
+        Four verified product lines. Specifications, grades and cylinder sizes are deliberately omitted
+        until the company confirms them for publication.
+      </p>
+    </div>
+
+    <div class="product-grid">
+      <article class="product">
+        <span class="product__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3.5c3 3 4.9 5.4 4.9 8a4.9 4.9 0 0 1-9.8 0c0-2.6 1.9-5 4.9-8Z"/>
+            <path d="M7 19.5h10"/>
+          </svg>
+        </span>
+        <h3>Liquefied Petroleum Gas (LPG)</h3>
+        <p>
+          Bulk LPG into storage and out to distributors, commercial users and households through
+          cylinders and bulk road delivery.
+        </p>
+        <ul>
+          <li>Bulk storage and onward allocation</li>
+          <li>Supply to distributors and resellers</li>
+          <li>Cylinder refilling and exchange</li>
+        </ul>
+        <div class="product__foot"><span class="tag">Verified business line</span></div>
+      </article>
+
+      <article class="product">
+        <span class="product__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3.2c3.6 4.6 6 6.4 6 10.2A6 6 0 0 1 6 13.4c0-3.8 2.4-5.6 6-10.2Z"/>
+            <path d="M9.6 14.2a2.4 2.4 0 0 0 4.8 0"/>
+          </svg>
+        </span>
+        <h3>Refined petroleum products</h3>
+        <p>
+          Bulk storage and distribution of white products &mdash; PMS, AGO and DPK &mdash; supplied through
+          the terminal to commercial and retail buyers.
+        </p>
+        <ul>
+          <li>Premium Motor Spirit (PMS)</li>
+          <li>Automotive Gas Oil (AGO)</li>
+          <li>Dual Purpose Kerosene (DPK)</li>
+        </ul>
+        <div class="product__foot"><span class="tag">Product slate per public sources</span></div>
+      </article>
+
+      <article class="product">
+        <span class="product__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6.4" y="4" width="11.2" height="16" rx="3.4"/>
+            <path d="M9.6 4V2.8h4.8V4M9.6 9.2h4.8"/>
+          </svg>
+        </span>
+        <h3>Gas cylinders</h3>
+        <p>
+          LPG cylinders supplied to distributors and retailers for household and commercial use.
+          Cylinder manufacturing and testing scope is being confirmed.
+        </p>
+        <ul>
+          <li>Cylinder supply and exchange channels</li>
+          <li>Distributor and retailer allocation</li>
+          <li>Manufacturing and testing: pending confirmation</li>
+        </ul>
+        <div class="product__foot"><span class="confirm">Scope to be confirmed</span></div>
+      </article>
+
+      <article class="product">
+        <span class="product__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 20.5h18M5 20.5V9.2l7-5.7 7 5.7v11.3M9.6 20.5v-5.2h4.8v5.2"/>
+          </svg>
+        </span>
+        <h3>Terminal &amp; logistics services</h3>
+        <p>
+          Bulk storage, marine receipt at the terminal jetty and road dispatch for product moving into
+          the South-South and beyond.
+        </p>
+        <ul>
+          <li>Terminal storage and handling</li>
+          <li>Jetty receipt and discharge</li>
+          <li>Truck loading and dispatch</li>
+        </ul>
+        <div class="product__foot"><span class="tag">Infrastructure-based service</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PLATFORM ============ -->
+<section class="section section--dark platform" id="platform">
+  <div class="container">
+    <div class="section-head section-head--split">
+      <div>
+        <span class="eyebrow eyebrow--light">The platform concept</span>
+        <h2>A digital thread from cargo discharge to the cylinder at the door.</h2>
+        <p class="lede">
+          One operating system for procurement, storage, production, distribution and finance &mdash; so a
+          quantity recorded at the jetty is the same quantity a distributor sees, and the same figure the
+          board reviews.
+        </p>
+      </div>
+      <p class="aside-note">
+        Screens on this page are an illustrative interface concept with sample data. They are not connected
+        to any system and contain no Stockgap transactions.
+      </p>
+    </div>
+
+    <div class="scope-note">
+      <span aria-hidden="true">&#9679;</span>
+      <span><b>Prototype scope:</b> this is a static visual concept. Nothing here signs in, records a
+      transaction or calls a service. Every figure shown in the screens below is sample data.</span>
+    </div>
+
+    <div class="mock-scroll" style="margin-top:32px">
+      <div class="window">
+        <div class="window-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="window-title">portal &middot; executive overview</span>
+          <span class="sample-badge">Sample data</span>
+        </div>
+        <div class="app">
+          <aside class="app-side">
+            <div class="app-brand"><span>S</span><b>STOCKGAP OPS</b></div>
+            <div class="app-nav is-active"><i></i>Overview</div>
+            <div class="app-nav"><i></i>Procurement<em>3</em></div>
+            <div class="app-nav"><i></i>Inventory</div>
+            <div class="app-nav"><i></i>Production</div>
+            <div class="app-nav"><i></i>Logistics<em>4</em></div>
+            <div class="app-nav"><i></i>Sales &amp; orders</div>
+            <div class="app-nav"><i></i>Finance</div>
+            <div class="app-nav"><i></i>HSE<em>2</em></div>
+            <div class="app-nav"><i></i>Reports</div>
+            <div class="app-side-foot">
+              <span class="avatar">AO</span>
+              <div><b>A. Okon</b><span>Executive &middot; read + approve</span></div>
+            </div>
+          </aside>
+          <div class="app-main">
+            <div class="app-top">
+              <span class="crumbs">Operations / <b>Executive overview</b></span>
+              <span class="app-search">Search records, orders, tanks&hellip;</span>
+              <span class="app-bell" aria-hidden="true"></span>
+            </div>
+            <div class="app-body">
+              <div class="kpis">
+                <div class="kpi"><small>LPG in storage</small><b>9,240 MT</b><span>&#9650; 6.2% vs last week</span></div>
+                <div class="kpi"><small>In transit</small><b>4 loads</b><span>1 due today</span></div>
+                <div class="kpi"><small>Awaiting approval</small><b>7</b><span class="warn">2 ageing &gt; 24h</span></div>
+                <div class="kpi"><small>Open HSE actions</small><b>3</b><span class="warn">1 overdue</span></div>
+              </div>
+
+              <div class="panels">
+                <div class="panel">
+                  <div class="panel-head"><b>LPG stock position</b><span>Last 30 days &middot; MT</span></div>
+                  <svg viewBox="0 0 520 150" preserveAspectRatio="none" style="width:100%;height:132px;display:block" role="img" aria-label="Illustrative line chart of LPG stock over 30 days">
+                    <defs>
+                      <linearGradient id="areaFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#3D8BE6" stop-opacity=".34"/>
+                        <stop offset="1" stop-color="#3D8BE6" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <line x1="0" y1="35" x2="520" y2="35" stroke="#1B3040" stroke-width="1"/>
+                    <line x1="0" y1="75" x2="520" y2="75" stroke="#1B3040" stroke-width="1"/>
+                    <line x1="0" y1="115" x2="520" y2="115" stroke="#1B3040" stroke-width="1"/>
+                    <path d="M0,118 L40,112 L80,116 L120,104 L160,100 L200,107 L240,96 L280,90 L320,94 L360,84 L400,78 L440,82 L480,71 L520,64 L520,150 L0,150 Z" fill="url(#areaFill)"/>
+                    <polyline points="0,118 40,112 80,116 120,104 160,100 200,107 240,96 280,90 320,94 360,84 400,78 440,82 480,71 520,64" fill="none" stroke="#5AA0EE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <div class="legend"><span><i></i>Available inventory</span><span><i class="g"></i>Reserved</span></div>
+                </div>
+                <div class="panel">
+                  <div class="panel-head"><b>Approvals queue</b><span>7 open</span></div>
+                  <table class="mini-table">
+                    <thead><tr><th>Reference</th><th>Record</th><th style="text-align:right">Value</th></tr></thead>
+                    <tbody>
+                      <tr><td class="ref">PO-26-0418</td><td>LPG purchase order</td><td class="num">750 MT</td></tr>
+                      <tr><td class="ref">SO-26-1127</td><td>Distributor allocation</td><td class="num">120 MT</td></tr>
+                      <tr><td class="ref">TR-26-0088</td><td>Tank transfer T-02 &rarr; T-04</td><td class="num">300 MT</td></tr>
+                      <tr><td class="ref">WO-26-1042</td><td>Cylinder work order</td><td class="num">480 units</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="subpanels">
+                <div class="panel">
+                  <div class="panel-head"><b>Inventory by product</b></div>
+                  <div class="bar-row"><span>LPG</span><div class="track"><div class="fill" style="width:71%"></div></div><b>9,240 MT</b></div>
+                  <div class="bar-row"><span>PMS</span><div class="track"><div class="fill fill--g" style="width:46%"></div></div><b>2.3 ML</b></div>
+                  <div class="bar-row"><span>AGO</span><div class="track"><div class="fill fill--g" style="width:38%"></div></div><b>1.7 ML</b></div>
+                  <div class="bar-row"><span>DPK</span><div class="track"><div class="fill fill--a" style="width:26%"></div></div><b>0.9 ML</b></div>
+                </div>
+                <div class="panel">
+                  <div class="panel-head"><b>Deliveries in progress</b></div>
+                  <ul class="list-mini">
+                    <li>PH-441-BA &middot; LPG 18 MT <em>Port Harcourt</em></li>
+                    <li>PH-903-KL &middot; AGO 33,000 L <em>Aba</em></li>
+                    <li>PH-118-DE &middot; Cylinders 240 <em>Uyo</em></li>
+                    <li>PH-672-GH &middot; DPK 12,000 L <em>Owerri</em></li>
+                  </ul>
+                </div>
+                <div class="panel">
+                  <div class="panel-head"><b>Exceptions</b></div>
+                  <ul class="list-mini">
+                    <li>Tank T-03 dip variance 0.4% <em>Review</em></li>
+                    <li>PO-26-0402 delivery overdue <em>2 days</em></li>
+                    <li>QC hold: 12 cylinders <em>Quarantine</em></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<style>
+.mock-pair{display:grid;grid-template-columns:1.12fr .88fr;gap:22px;margin-top:22px}
+.mock-pair .window{min-width:0}
+@media (max-width:1100px){.mock-pair{grid-template-columns:1fr}}
+.flow-note{margin-top:14px;font-size:.75rem;color:#7E93A3;line-height:1.6}
+.table-scroll{overflow-x:auto;overscroll-behavior-x:contain}
+@media (max-width:760px){.reg-table{min-width:660px}}
+</style>
+
+    <div class="mock-pair">
+      <!-- Traceability window -->
+      <div class="window">
+        <div class="window-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="window-title">lpg &middot; movement trace</span>
+          <span class="sample-badge">Sample data</span>
+        </div>
+        <div class="trace-wrap">
+          <div class="trace-head">
+            <div>
+              <h4>Cargo STG-LPG-26-041 &mdash; closed</h4>
+              <p>Purchase order PO-26-0418 &middot; 1,050 MT nominated &middot; 1,048.6 MT received</p>
+            </div>
+            <span class="chip chip--ok">Reconciled</span>
+          </div>
+          <div class="trace">
+            <div class="trace-step is-done">
+              <span class="trace-time">04 Nov<br>08:12</span>
+              <span class="trace-rail"><i class="trace-dot"></i></span>
+              <span class="trace-body"><b>Cargo nominated</b><span>Purchase order approved &middot; supplier <code>SUP-004</code> &middot; 1,050 MT</span></span>
+            </div>
+            <div class="trace-step is-done">
+              <span class="trace-time">06 Nov<br>19:40</span>
+              <span class="trace-rail"><i class="trace-dot"></i></span>
+              <span class="trace-body"><b>Discharged at jetty</b><span>Vessel receipt &middot; 1,048.6 MT measured &middot; 1.4 MT difference closed</span></span>
+            </div>
+            <div class="trace-step is-done">
+              <span class="trace-time">06 Nov<br>22:05</span>
+              <span class="trace-rail"><i class="trace-dot"></i></span>
+              <span class="trace-body"><b>Quality verification</b><span>Certificate of analysis checked &middot; released to storage <code>GRN-26-0194</code></span></span>
+            </div>
+            <div class="trace-step is-done">
+              <span class="trace-time">06 Nov<br>23:30</span>
+              <span class="trace-rail"><i class="trace-dot"></i></span>
+              <span class="trace-body"><b>Allocated to tank</b><span>Tank T-04 &middot; batch <code>B-LPG-26-041</code> &middot; 1,048.6 MT available</span></span>
+            </div>
+            <div class="trace-step is-done">
+              <span class="trace-time">09 Nov<br>07:15</span>
+              <span class="trace-rail"><i class="trace-dot"></i></span>
+              <span class="trace-body"><b>Reserved for distributor</b><span>Sales order <code>SO-26-1127</code> &middot; 120 MT reserved out of batch</span></span>
+            </div>
+            <div class="trace-step is-done">
+              <span class="trace-time">09 Nov<br>11:40</span>
+              <span class="trace-rail"><i class="trace-dot"></i></span>
+              <span class="trace-body"><b>Dispatched by road</b><span>Truck PH-441-BA &middot; 120 MT &middot; dispatch note <code>DN-26-0771</code></span></span>
+            </div>
+            <div class="trace-step is-done">
+              <span class="trace-time">09 Nov<br>16:20</span>
+              <span class="trace-rail"><i class="trace-dot"></i></span>
+              <span class="trace-body"><b>Delivery acknowledged</b><span>Recipient confirmation recorded &middot; order closed</span></span>
+            </div>
+          </div>
+          <div class="trace-foot">
+            <span><b>7</b> events</span>
+            <span><b>3</b> documents attached</span>
+            <span>Audit log &middot; immutable</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cylinder QC window -->
+      <div class="window">
+        <div class="window-bar">
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="window-title">production &middot; quality</span>
+          <span class="sample-badge">Sample data</span>
+        </div>
+        <div class="trace-wrap">
+          <div class="trace-head">
+            <div>
+              <h4>Work order WO-26-1042</h4>
+              <p>Batch B-26-31 &middot; cylinder assembly &middot; 480 units planned</p>
+            </div>
+            <span class="chip chip--info">In inspection</span>
+          </div>
+          <div class="qc-summary">
+            <div class="qc-cell"><small>Completed</small><b>452</b></div>
+            <div class="qc-cell"><small>Passed</small><b>438</b></div>
+            <div class="qc-cell"><small>Quarantined</small><b>14</b></div>
+          </div>
+          <table class="mini-table">
+            <thead><tr><th>Serial</th><th>Test</th><th style="text-align:right">Status</th></tr></thead>
+            <tbody>
+              <tr><td class="ref">SG-CYL-26-041882</td><td>Pressure + leak</td><td style="text-align:right"><span class="chip chip--ok">Passed</span></td></tr>
+              <tr><td class="ref">SG-CYL-26-041883</td><td>Pressure + leak</td><td style="text-align:right"><span class="chip chip--ok">Passed</span></td></tr>
+              <tr><td class="ref">SG-CYL-26-041884</td><td>Dimensional</td><td style="text-align:right"><span class="chip chip--bad">Quarantined</span></td></tr>
+              <tr><td class="ref">SG-CYL-26-041885</td><td>Pressure + leak</td><td style="text-align:right"><span class="chip chip--ok">Passed</span></td></tr>
+              <tr><td class="ref">SG-CYL-26-041886</td><td>Final inspection</td><td style="text-align:right"><span class="chip chip--wait">Pending</span></td></tr>
+            </tbody>
+          </table>
+          <p class="flow-note" style="color:#7E95A8">Every unit carries a serial number and a custody record from production through warehouse, distributor and retailer. Test parameters are configured per the applicable standard &mdash; to be confirmed before use.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="roles">
+      <div class="role"><b>Executive</b><span>Consolidated stock, sales, approvals and HSE position.</span><i>read + approve</i></div>
+      <div class="role"><b>Operations manager</b><span>Approvals, allocations and cross-module exceptions.</span><i>approve</i></div>
+      <div class="role"><b>Depot manager</b><span>Only the depots and tanks assigned to them.</span><i>scoped</i></div>
+      <div class="role"><b>Procurement officer</b><span>Suppliers, requisitions and purchase orders.</span><i>create + submit</i></div>
+      <div class="role"><b>Production &amp; QC</b><span>Work orders, serials, test records and quarantine.</span><i>inspect</i></div>
+      <div class="role"><b>Logistics &amp; driver</b><span>Dispatch notes and assigned deliveries only.</span><i>assigned</i></div>
+      <div class="role"><b>Distributor &amp; retailer</b><span>Own orders, allocations, invoices and deliveries.</span><i>own account</i></div>
+      <div class="role"><b>Finance &amp; auditor</b><span>Invoices, recorded payments, read-only audit trail.</span><i>read-only</i></div>
+    </div>
+
+    <div class="flow" role="img" aria-label="Illustrative supply chain flow: procurement, receipt, storage, production, allocation, dispatch, delivery, reconciliation">
+      <div class="flow-step"><i>01</i><b>Procurement</b><span>Requisition to approved purchase order</span></div>
+      <div class="flow-step"><i>02</i><b>Receipt</b><span>Jetty discharge, measurement, quality check</span></div>
+      <div class="flow-step"><i>03</i><b>Storage</b><span>Tank and warehouse balances by batch</span></div>
+      <div class="flow-step"><i>04</i><b>Production</b><span>Cylinder work orders and testing</span></div>
+      <div class="flow-step"><i>05</i><b>Allocation</b><span>Reserve stock against a confirmed order</span></div>
+      <div class="flow-step"><i>06</i><b>Dispatch</b><span>Vehicle, driver and delivery note</span></div>
+      <div class="flow-step"><i>07</i><b>Delivery</b><span>Recipient acknowledgement</span></div>
+      <div class="flow-step"><i>08</i><b>Reconcile</b><span>Stock, invoice and audit trail close</span></div>
+    </div>
+    <p class="flow-note">Each step writes a status transition, an actor and a timestamp to the audit trail. Approvals are checked on the server, not in the browser.</p>
+  </div>
+</section>
+<!-- ============ PORTAL ============ -->
+<section class="section section--white" id="portal">
+  <div class="container">
+    <div class="grid-2">
+      <div>
+        <span class="eyebrow">Portal access</span>
+        <h2>One entry point, separate views for every participant.</h2>
+        <p class="lede" style="margin-top:14px">
+          Staff, distributors, retailers, transporters and suppliers sign in to the same platform and see
+          only what their role and depot assignment allow. A driver sees today&rsquo;s delivery. An executive
+          sees the position across the business.
+        </p>
+        <div class="commitments" style="margin-top:30px">
+          <div class="commitment">
+            <i>01</i>
+            <div><b>Scoped by organisation and location</b>
+              <p>A distributor can only reach their own account, orders and allocated stock. Depot staff are restricted to assigned sites.</p>
+            </div>
+          </div>
+          <div class="commitment">
+            <i>02</i>
+            <div><b>Approvals are recorded, not just permitted</b>
+              <p>Every approval, adjustment and dispatch keeps the actor, the time and the reason attached to the record.</p>
+            </div>
+          </div>
+          <div class="commitment">
+            <i>03</i>
+            <div><b>Invitation-based onboarding</b>
+              <p>Business partners are invited and verified rather than self-registering into internal modules.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-card panel-card--dark">
+        <span class="sample-badge" style="float:right">Prototype</span>
+        <h3 style="font-size:1rem;color:#EAF3FA">Sign in to the operations portal</h3>
+        <p style="margin-top:8px;font-size:.8125rem;line-height:1.6;color:#8CA3B3">
+          For authorised Stockgap staff and business partners.
+        </p>
+        <div>
+          <div class="field">
+            <label for="p-email" style="color:#C6D6E2">Work email</label>
+            <input id="p-email" type="email" placeholder="name@company.com" disabled>
+          </div>
+          <div class="field">
+            <label for="p-pass" style="color:#C6D6E2">Password</label>
+            <input id="p-pass" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" disabled>
+          </div>
+          <button class="btn btn--primary" type="button" disabled aria-disabled="true" style="width:100%;margin-top:18px;opacity:.6">Sign in</button>
+        </div>
+        <p style="margin-top:14px;font-size:.6875rem;line-height:1.6;color:#738A9C">
+          Sign-in is not implemented in this prototype. The fields above are disabled and no credentials are accepted.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAFETY ============ -->
+<section class="section section--paper" id="safety">
+  <div class="container">
+    <div class="split split--reverse">
+      <figure class="figure figure--tall">
+        <span class="figure-tag">Company photograph</span>
+        <img src="DATA_URI" alt="A large group of Stockgap Fuels staff and visiting officials in high-visibility vests and hard hats standing in front of the LPG storage spheres." loading="lazy" />
+        <figcaption>Terminal walk-down with visiting officials and staff. Photograph supplied by the company.</figcaption>
+      </figure>
+      <div class="split-copy">
+        <span class="eyebrow">Safety, compliance &amp; sustainability</span>
+        <h2>LPG is only useful if it is handled without incident.</h2>
+        <p>
+          Storage and distribution of a flammable product depend on discipline: controlled access,
+          documented inspection, trained people and records that survive an audit.
+        </p>
+        <div class="commitments">
+          <div class="commitment">
+            <i>01</i>
+            <div><b>Operational safety</b><p>Permit-controlled work, documented walk-downs and recorded handovers at every transfer point.</p></div>
+          </div>
+          <div class="commitment">
+            <i>02</i>
+            <div><b>Incident and hazard reporting</b><p>HSE observations, corrective actions and closure tracked with the same rigour as commercial records.</p></div>
+          </div>
+          <div class="commitment">
+            <i>03</i>
+            <div><b>Environmental responsibility</b><p>LPG distribution displaces kerosene and firewood use. Claims about emissions or savings require measurement and are not made here.</p></div>
+          </div>
+          <div class="commitment">
+            <i>04</i>
+            <div><b>Regulatory alignment</b><p>The platform is designed to record the licences, inspections and certificates that NMDPRA, SON and NUPRC requirements demand. It does not itself confer compliance.</p></div>
+          </div>
+        </div>
+        <div class="callout">
+          <b>Certifications and licences are pending confirmation.</b> No regulatory approval, certification
+          or compliance status is asserted on this page. Verified credentials will be published once
+          confirmed by the company and its advisers.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ CONTACT ============ -->
+<section class="section section--white" id="contact">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Contact &amp; business enquiries</span>
+      <h2>Talk to the terminal.</h2>
+      <p class="lede">Supply enquiries, distribution partnerships and supplier onboarding all start here.</p>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <div class="panel-card">
+          <h3>Head office &amp; terminal</h3>
+          <dl class="contact-list">
+            <div><dt>Address</dt><dd>Eagle Cement Road, Rumuolumeni<br>Port Harcourt, Rivers State, Nigeria<br><small>As published on the company website &mdash; to be confirmed</small></dd></div>
+            <div><dt>Telephone</dt><dd>+234 (84) 700 149<br><small>Published number; current lines to be confirmed</small></dd></div>
+            <div><dt>Email</dt><dd>[Official email address to be confirmed]<br><small>Deliberately not invented</small></dd></div>
+            <div><dt>Portal</dt><dd>Authorised staff and partners &mdash; <a href="#portal" style="color:var(--blue);border-bottom:1px solid #B9D1EC">portal access</a></dd></div>
+          </dl>
+        </div>
+        <div class="callout" style="margin-top:22px;border-color:#D8E4F0;background:#F5F9FD;color:#2C465E">
+          <b>Enquiries in this prototype are not delivered.</b> The form is a layout concept; it has no backend and no recipient.
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h3>Send an enquiry</h3>
+        <div class="field">
+          <label for="c-type">Enquiry type</label>
+          <select id="c-type" disabled>
+            <option>Product supply &mdash; LPG</option>
+            <option>Product supply &mdash; PMS / AGO / DPK</option>
+            <option>Distribution partnership</option>
+            <option>Supplier / vendor registration</option>
+            <option>General enquiry</option>
+          </select>
+        </div>
+        <div class="grid-2" style="gap:18px">
+          <div class="field">
+            <label for="c-name">Full name</label>
+            <input id="c-name" type="text" placeholder="Your name" disabled>
+          </div>
+          <div class="field">
+            <label for="c-company">Company</label>
+            <input id="c-company" type="text" placeholder="Company name" disabled>
+          </div>
+        </div>
+        <div class="field">
+          <label for="c-email">Email</label>
+          <input id="c-email" type="email" placeholder="you@company.com" disabled>
+        </div>
+        <div class="field">
+          <label for="c-message">Message</label>
+          <textarea id="c-message" rows="4" placeholder="Volume, location and timeline&hellip;" disabled></textarea>
+        </div>
+        <button class="btn btn--primary" type="button" disabled aria-disabled="true" style="margin-top:18px;opacity:.55">Submit enquiry</button>
+        <p class="form-note">Prototype only &mdash; the form is disabled and no data leaves this file.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ APPENDIX ============ -->
+<section class="appendix" id="sources">
+  <div class="container">
+    <span class="appendix-tag">Appendix &middot; not for publication</span>
+    <h2>Research notes, sources and open questions.</h2>
+    <p class="lede">
+      Every company-specific statement on this page is traceable to a public source below, or is marked
+      as pending confirmation. Nothing here is invented to fill a gap.
+    </p>
+
+    <div class="table-scroll">
+    <table class="reg-table">
+      <thead>
+        <tr><th>Information</th><th>Finding</th><th>Source</th><th>Confidence</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Company identity</td>
+          <td>Incorporated in Nigeria as a private limited liability company; engaged in distribution of refined petroleum products and LPG.</td>
+          <td><a href="https://www.stockgapfuels.com/" rel="noopener">stockgapfuels.com</a></td>
+          <td><span class="conf conf--h">High</span></td>
+        </tr>
+        <tr>
+          <td>Supply routes</td>
+          <td>Direct import from international trading partners, or coastal lifting under a strategic alliance with NNPC.</td>
+          <td><a href="https://www.stockgapfuels.com/" rel="noopener">stockgapfuels.com</a></td>
+          <td><span class="conf conf--h">High</span></td>
+        </tr>
+        <tr>
+          <td>Terminal &amp; location</td>
+          <td>LPG terminal at Rumuolumeni, Port Harcourt; project began 2013 and was completed in 2019; commissioned by NLNG as a South-South distribution point.</td>
+          <td><a href="https://businessday.ng/energy/oilandgas/article/nlng-commissions-stockgaps-lpg-distribution-point-in-ph-for-s-south" rel="noopener">BusinessDay</a></td>
+          <td><span class="conf conf--h">High</span></td>
+        </tr>
+        <tr>
+          <td>Storage capacity</td>
+          <td>15,000 MT reported in December 2022, with expansion planned. An earlier 2022 report cites 8,000 MT at commissioning. Figures conflict.</td>
+          <td><a href="https://sweetcrudereports.com/stockgaps-15000mt-lpg-storage-facility-to-double-by-2024" rel="noopener">SweetCrude</a> &middot; <a href="https://kiakiagas.com/blog/product/overview-nigeria%E2%80%99s-lpg-down-stream-sector" rel="noopener">KiakiaGas</a></td>
+          <td><span class="conf conf--m">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Product slate</td>
+          <td>Bulk storage and distribution of PMS, AGO, DPK and LPG described on the company&rsquo;s LinkedIn profile.</td>
+          <td><a href="https://linkedin.com/company/stockgap-fuels-limited" rel="noopener">LinkedIn</a></td>
+          <td><span class="conf conf--m">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Expansion</td>
+          <td>Additional storage and cylinder-filling facilities across four regions; composite cylinder / LPG laboratory project; site travel to Abuja, Port Harcourt, Ikene, Gombe and Ogun.</td>
+          <td><a href="https://jobsinnigeria.careers/jobs/project-manager-multi-site-lpg-bottling-composite-cylinder-lpg-laboratory-stockgap-fuels-limited" rel="noopener">Recruitment listing, Oct 2026</a></td>
+          <td><span class="conf conf--m">Medium</span></td>
+        </tr>
+        <tr>
+          <td>Contact details</td>
+          <td>Eagle Cement Road, Rumuolumeni, Port Harcourt; +234 (84) 700 149 published on the company website. No official email published there.</td>
+          <td><a href="https://www.stockgapfuels.com/" rel="noopener">stockgapfuels.com</a></td>
+          <td><span class="conf conf--m">Medium</span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top:36px;font-size:.875rem;color:#DCE8F1;letter-spacing:.02em">Open items requiring the company&rsquo;s input</h3>
+    <ul class="pending">
+      <li>Verified working storage capacity and tank configuration</li>
+      <li>Cylinder manufacturing scope, sizes and applicable standards</li>
+      <li>Licences and certifications approved for public display</li>
+      <li>Official email addresses and current telephone lines</li>
+      <li>Management names and designations cleared for publication</li>
+      <li>Current depot and distribution footprint</li>
+      <li>Approved corporate logo and brand assets</li>
+      <li>HSE and sustainability figures with a documented basis</li>
+    </ul>
+
+    <p class="appendix-note">
+      Photographs supplied by the client and reproduced unaltered. The wordmark used in this prototype is a
+      typographic placeholder, not the official corporate logo. Interface screens are illustrative and use
+      sample data. No regulatory compliance is claimed.
+    </p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="Stockgap Fuels Limited">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3.2c2.7 2.6 4.6 4.9 4.6 7.4A4.6 4.6 0 0 1 12 15.2a4.6 4.6 0 0 1-4.6-4.6c0-2.5 1.9-4.8 4.6-7.4Z"/>
+              <path d="M6.4 18.4h11.2M8.2 21h7.6"/>
+            </svg>
+          </span>
+          <span class="brand-text"><strong>STOCKGAP</strong><small>FUELS LIMITED</small></span>
+        </a>
+        <p>LPG storage, refined petroleum product distribution and gas cylinder supply from Port Harcourt, Rivers State.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#company">About</a></li>
+          <li><a href="#operations">Operations</a></li>
+          <li><a href="#safety">Safety</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#products">LPG</a></li>
+          <li><a href="#products">PMS &middot; AGO &middot; DPK</a></li>
+          <li><a href="#products">Gas cylinders</a></li>
+          <li><a href="#products">Terminal services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Platform</h4>
+        <ul>
+          <li><a href="#platform">Concept overview</a></li>
+          <li><a href="#platform">Traceability</a></li>
+          <li><a href="#portal">Portal access</a></li>
+          <li><a href="#sources">Research notes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Stockgap Fuels Limited. Visual prototype for pitch purposes &mdash; not the live corporate site. No transactions, accounts or integrations are active.</p>
+      <p>Photographs supplied by the company. Placeholder wordmark. Capacity and compliance details pending confirmation.</p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
