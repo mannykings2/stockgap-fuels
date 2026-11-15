@@ -6,6 +6,7 @@ import { ThemeToggle } from "./ThemeToggle";
 import { cx } from "@/components/ui/primitives";
 
 const links = [
+  { to: "/", label: "Home" },
   { to: "/about", label: "Company" },
   { to: "/products", label: "Products" },
   { to: "/services", label: "Services" },
@@ -57,7 +58,7 @@ export function MarketingLayout() {
           )}
         >
           <Logo onDark={onHero} />
-          <nav className="ml-auto hidden items-center gap-6 lg:flex" aria-label="Primary">
+          <nav className="ml-auto hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Primary">
             {links.map((link) => (
               <NavLink
                 key={link.to}
@@ -181,13 +182,15 @@ export function MarketingLayout() {
           <div>
             <p className="text-[11px] font-semibold tracking-[0.14em] text-ink uppercase">Company</p>
             <ul className="mt-3 space-y-2 text-[13px] text-muted">
-              {links.map((link) => (
-                <li key={link.to}>
-                  <Link to={link.to} className="hover:text-ink">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
+              {links
+                .filter((link) => link.to !== "/")
+                .map((link) => (
+                  <li key={link.to}>
+                    <Link to={link.to} className="hover:text-ink">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </div>
           <div>

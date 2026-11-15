@@ -16,12 +16,24 @@ function int(value: string | undefined, fallback: number): number {
 }
 
 const isTest = process.env.NODE_ENV === "test";
+const isProduction = process.env.NODE_ENV === "production";
 const databaseFileSetting = process.env.DATABASE_FILE ?? "./data/stockgap.db";
+
+/*
+ * Demo account switcher. Enabled by default outside production. In a hosted
+ * environment (where NODE_ENV is "production") it must be switched on
+ * explicitly with DEMO_ACCOUNTS=true, and should be switched off again once
+ * testing is finished.
+ */
+const demoAccountsSetting = process.env.DEMO_ACCOUNTS?.trim().toLowerCase();
+const demoAccountsEnabled =
+  demoAccountsSetting === "true" || (demoAccountsSetting !== "false" && !isProduction);
 
 export const env = {
   nodeEnv: process.env.NODE_ENV ?? "development",
-  isProduction: process.env.NODE_ENV === "production",
+  isProduction,
   isTest,
+  demoAccountsEnabled,
   // Some process managers inject PORT=0; fall back to the documented default.
   port: int(process.env.PORT, 4000) > 0 ? int(process.env.PORT, 4000) : 4000,
   databaseFile:
@@ -36,6 +48,12 @@ export const env = {
     .filter(Boolean),
   webDist: path.resolve(serverRoot, "../web/dist"),
 } as const;
+
+if (isProduction && demoAccountsEnabled) {
+  console.warn(
+    "DEMO_ACCOUNTS is enabled in production: the demo account list and its shared password are publicly readable.",
+  );
+}
 
 if (env.isProduction && env.sessionSecret.startsWith("development-")) {
   throw new Error("SESSION_SECRET must be set to a strong random value in production");

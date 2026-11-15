@@ -242,9 +242,12 @@ export function changePassword(
   });
 }
 
-/** Demo account switcher data. Available outside production only. */
+/**
+ * Demo account switcher data. Served when DEMO_ACCOUNTS is enabled — on by
+ * default outside production, opt-in in a deployed environment.
+ */
 export function demoAccounts() {
-  if (env.isProduction) return [];
+  if (!env.demoAccountsEnabled) return [];
   return DEMO_ACCOUNTS.map((account) => ({
     email: account.email,
     fullName: account.fullName,

@@ -28,7 +28,7 @@ List endpoints accept `page` and `pageSize` where marked *paged*, and return:
 | POST | `/auth/forgot-password` | `{ email }`; returns a reset token in development only |
 | POST | `/auth/reset-password` | `{ token, password }` |
 | POST | `/auth/change-password` | `{ currentPassword, newPassword }` |
-| GET | `/auth/demo-accounts` | Development only |
+| GET | `/auth/demo-accounts` | Only when `DEMO_ACCOUNTS` is enabled (default outside production, opt-in with `DEMO_ACCOUNTS=true` when deployed) |
 
 ## Reference data
 

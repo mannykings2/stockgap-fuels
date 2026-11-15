@@ -136,7 +136,7 @@ export function Login() {
             </div>
           ) : null}
           <p className="border-t border-line px-4 py-2 text-[10px] leading-relaxed text-muted">
-            Development only. Every account uses the same demo password and sample data.
+Testing accounts. Every account uses the same demo password and sample data.
           </p>
         </div>
       ) : null}

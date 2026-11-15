@@ -86,8 +86,10 @@ Password for every account: **`Stockgap#2026`**
 | `transporter@stockgap.demo` | Transporter | Own shipments |
 | `customer@stockgap.demo` | Customer | Own orders and invoices |
 
-Demo accounts are only returned by `/api/auth/demo-accounts` when
-`NODE_ENV !== "production"`.
+Demo accounts are returned by `/api/auth/demo-accounts` when demo accounts are enabled: by
+default outside production, and in a deployed environment only when
+`DEMO_ACCOUNTS=true` is set in the server's environment. Hosted deployments normally run with
+`NODE_ENV=production`, so without that flag the login screen hides the demo switcher.
 
 ## Scripts
 
