@@ -102,7 +102,10 @@ export function createApp(db: Db) {
         next();
         return;
       }
-      res.sendFile(indexHtml);
+      // Root-relative send avoids absolute-path resolution quirks on Windows hosts.
+      res.sendFile("index.html", { root: env.webDist }, (error) => {
+        if (error) next(error);
+      });
     });
   }
 
