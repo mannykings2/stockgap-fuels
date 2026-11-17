@@ -83,7 +83,7 @@ Password for every account: **`Stockgap#2026`**
 | `distributor@stockgap.demo` | Distributor (Bonny Basin Gas) | Own orders only |
 | `retailer@stockgap.demo` | Retailer | Own orders only |
 | `supplier@stockgap.demo` | Supplier | Own purchase orders |
-| `transporter@stockgap.demo` | Transporter | Own shipments |
+| `transporter@stockgap.demo` | Haulage | Own shipments |
 | `customer@stockgap.demo` | Customer | Own orders and invoices |
 
 Demo accounts are returned by `/api/auth/demo-accounts` when demo accounts are enabled: by

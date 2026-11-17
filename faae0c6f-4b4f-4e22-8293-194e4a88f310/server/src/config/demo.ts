@@ -32,6 +32,6 @@ export const DEMO_ACCOUNTS: DemoAccount[] = [
   { email: "distributor@stockgap.demo", fullName: "Ngozi Nwafor", roleId: "distributor", roleLabel: "Distributor", partyCode: "PTY-0004", jobTitle: "Commercial Manager" },
   { email: "retailer@stockgap.demo", fullName: "Sani Musa", roleId: "retailer", roleLabel: "Retailer", partyCode: "PTY-0005", jobTitle: "Outlet Manager" },
   { email: "supplier@stockgap.demo", fullName: "Peter Okoye", roleId: "supplier", roleLabel: "Supplier", partyCode: "PTY-0001", jobTitle: "Account Manager" },
-  { email: "transporter@stockgap.demo", fullName: "John Bassey", roleId: "transporter", roleLabel: "Transporter", partyCode: "PTY-0006", jobTitle: "Dispatch Coordinator" },
+  { email: "transporter@stockgap.demo", fullName: "John Bassey", roleId: "transporter", roleLabel: "Haulage", partyCode: "PTY-0006", jobTitle: "Dispatch Coordinator" },
   { email: "customer@stockgap.demo", fullName: "Funmi Adebayo", roleId: "customer", roleLabel: "Customer", partyCode: "PTY-0007", jobTitle: "Facilities Buyer" },
 ];
