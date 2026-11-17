@@ -31,7 +31,10 @@ interface SeedResult {
 }
 
 export function seed(db: Db): SeedResult {
-  const existing = queryOne<{ count: number }>(db, "SELECT COUNT(*) AS count FROM users");
+  // Products are written only by this seed, so they are the marker for "already
+  // seeded". Users are not: migrations can create demo users before the seed
+  // runs on a fresh database.
+  const existing = queryOne<{ count: number }>(db, "SELECT COUNT(*) AS count FROM products");
   if (Number(existing?.count ?? 0) > 0) {
     return { skipped: true, users: 0, products: 0, orders: 0, productionOrders: 0, purchaseOrders: 0 };
   }
@@ -68,22 +71,24 @@ function seedRbac(db: Db): void {
       }
     }
   }
+  // Migrations may already have written part of the catalogue, so every RBAC
+  // insert is idempotent and simply fills in whatever is missing.
   for (const permission of PERMISSIONS) {
-    execute(db, "INSERT INTO permissions (code, module, description) VALUES (?, ?, ?)", [
+    execute(db, "INSERT OR IGNORE INTO permissions (code, module, description) VALUES (?, ?, ?)", [
       permission.code,
       permission.module,
       permission.description,
     ]);
   }
   for (const role of ROLES) {
-    execute(db, "INSERT INTO roles (id, name, label, description, is_system) VALUES (?, ?, ?, ?, 1)", [
+    execute(db, "INSERT OR IGNORE INTO roles (id, name, label, description, is_system) VALUES (?, ?, ?, ?, 1)", [
       role.id,
       role.name,
       role.label,
       role.description,
     ]);
     for (const permission of permissionsForRole(role)) {
-      execute(db, "INSERT INTO role_permissions (role_id, permission_code) VALUES (?, ?)", [role.id, permission]);
+      execute(db, "INSERT OR IGNORE INTO role_permissions (role_id, permission_code) VALUES (?, ?)", [role.id, permission]);
     }
   }
 }
@@ -254,6 +259,14 @@ function seedParties(db: Db): Record<string, string> {
 function seedUsers(db: Db, parties: Record<string, string>, result: SeedResult): Record<string, string> {
   const users: Record<string, string> = {};
   for (const account of DEMO_ACCOUNTS) {
+    // A migration may already have created this demo user (same unique email).
+    // Reuse it so seeded records can reference it.
+    const existingUser = queryOne<{ id: string }>(db, "SELECT id FROM users WHERE email = ?", [account.email]);
+    if (existingUser) {
+      users[account.roleId] = existingUser.id;
+      result.users += 1;
+      continue;
+    }
     const id = randomId();
     execute(
       db,

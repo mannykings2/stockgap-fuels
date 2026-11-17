@@ -23,7 +23,7 @@ switch (command) {
     const db = open();
     const result = seed(db);
     if (result.skipped) {
-      console.log("Database already contains users - nothing to seed. Use `npm run db:reset` to rebuild.");
+      console.log("Database already contains demonstration records - nothing to seed. Use `npm run db:reset` to rebuild.");
     } else {
       console.log(
         `Seeded demonstration data: ${result.users} users, ${result.products} products, ` +
